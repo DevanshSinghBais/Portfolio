@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-page: #FAF7F2;
+    --bg-surface: #FFFFFF;
+    --bg-surface-elevated: #FFFDF9;
+    --border-warm: rgba(200, 55, 45, 0.14);
+    --border-subtle: rgba(120, 113, 108, 0.15);
+    --accent-red: #C8372D;
+    --accent-red-hover: #AA281F;
+    --accent-red-light: #FBF0EE;
+    --text-primary: #1C1917;
+    --text-secondary: #57534E;
+    --text-muted: #78716C;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Plus Jakarta Sans', 'Outfit', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+  }
+
+  body {
+    overflow-x: hidden;
+    background-image: radial-gradient(rgba(200, 55, 45, 0.035) 1px, transparent 0);
+    background-size: 28px 28px;
+    background-position: -19px -19px;
+  }
+
+  /* Custom Warm Scrollbar */
+  ::-webkit-scrollbar {
+    width: 7px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #F3ECE2;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #C8372D;
+    border-radius: 9999px;
+    border: 2px solid #F3ECE2;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #AA281F;
+  }
+}
+
+.font-serif-human {
+  font-family: 'Fraunces', Georgia, serif;
+}
+
+/* 3D and Card Styles */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Human Sticky Stamp */
+.stamp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border-radius: 6px;
+  border: 1.5px dashed #C8372D;
+  color: #C8372D;
+  background-color: #FBF0EE;
+  transform: rotate(-1.5deg);
+  box-shadow: 2px 2px 0px rgba(200, 55, 45, 0.12);
+}
+
+.stamp-badge-alt {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border-radius: 6px;
+  border: 1.5px solid #1C1917;
+  color: #1C1917;
+  background-color: #FAF7F2;
+  transform: rotate(1.2deg);
+  box-shadow: 2px 2px 0px rgba(28, 25, 23, 0.2);
+}
+
+/* Glassmorphism for Warm Skin/Cream Theme */
+.glass-panel {
+  background: rgba(255, 253, 249, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(200, 55, 45, 0.12);
+  box-shadow: 0 10px 30px -10px rgba(170, 40, 31, 0.08), 0 4px 6px -2px rgba(28, 25, 23, 0.03);
+}
+
+.glass-panel-elevated {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(200, 55, 45, 0.18);
+  box-shadow: 0 20px 40px -15px rgba(200, 55, 45, 0.14), 0 8px 12px -4px rgba(28, 25, 23, 0.05);
+}
+
+/* Red Glow Effects */
+.glow-ruby {
+  box-shadow: 0 0 25px rgba(200, 55, 45, 0.22);
+}
+
+.glow-ruby-hover:hover {
+  box-shadow: 0 0 35px rgba(200, 55, 45, 0.32);
+}
+
+/* Orbit Animation */
+@keyframes spinClockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spinCounterClockwise {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+.animate-spin-slow {
+  animation: spinClockwise 28s linear infinite;
+}
+
+.animate-spin-reverse-slow {
+  animation: spinCounterClockwise 34s linear infinite;
+}
