@@ -12,6 +12,7 @@ interface Particle {
 }
 
 export function TinyRunningMan() {
+  const supportsHoverPointer = typeof window === 'undefined' || window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   const [pos, setPos] = useState({ x: 200, y: 200 });
   const [facingLeft, setFacingLeft] = useState(false);
   const [isRunning, setIsRunning] = useState(false);
@@ -28,6 +29,7 @@ export function TinyRunningMan() {
 
   // Periodic cute blinking when idle
   useEffect(() => {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
     const blinkInterval = setInterval(() => {
       setBlink(true);
       setTimeout(() => setBlink(false), 140);
@@ -36,6 +38,7 @@ export function TinyRunningMan() {
   }, []);
 
   useEffect(() => {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
     // Start near center of view
     const startX = window.innerWidth * 0.45;
     const startY = window.innerHeight * 0.4;
@@ -146,8 +149,9 @@ export function TinyRunningMan() {
       }
 
       // Update particle dust
-      setParticles((prev) =>
-        prev
+      setParticles((prev) => {
+        if (prev.length === 0) return prev;
+        return prev
           .map((p) => ({
             ...p,
             x: p.x + p.vx,
@@ -155,8 +159,8 @@ export function TinyRunningMan() {
             scale: Math.max(p.scale * 0.93, 0.2),
             opacity: p.opacity - 0.045,
           }))
-          .filter((p) => p.opacity > 0)
-      );
+          .filter((p) => p.opacity > 0);
+      });
 
       animId = requestAnimationFrame(loop);
     };
@@ -178,8 +182,10 @@ export function TinyRunningMan() {
   const drawstringSway = isRunning ? Math.sin(legCycle * Math.PI * 2) * 6 : 0;
   const bodyTilt = isRunning ? (facingLeft ? -8 : 8) : 0;
 
+  if (!supportsHoverPointer) return null;
+
   return (
-    <div className="pointer-events-none fixed inset-0 z-[99999] overflow-hidden select-none">
+    <div className="pointer-events-none fixed inset-0 z-[80] overflow-hidden select-none">
       {/* Particle dust trail */}
       {particles.map((p) => (
         <div
